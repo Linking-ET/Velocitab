@@ -215,6 +215,10 @@ public class PlayerTabList {
 
     private void handleDisplayLoad(@NotNull TabPlayer tabPlayer) {
         final Player joined = tabPlayer.getPlayer();
+        final String serverName = getServerName(joined);
+        if(plugin.getSettings().getIgnoreServers().contains(serverName)){
+            return;
+        }
         final Group group = tabPlayer.getGroup();
         final boolean isVanished = plugin.getVanishManager().isVanished(joined.getUsername());
         players.putIfAbsent(joined.getUniqueId(), tabPlayer);

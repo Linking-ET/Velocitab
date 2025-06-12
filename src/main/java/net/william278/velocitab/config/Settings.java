@@ -28,6 +28,7 @@ import net.william278.velocitab.Velocitab;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Set;
 
 
 @SuppressWarnings("FieldMayBeFinal")
@@ -109,6 +110,16 @@ public class Settings implements ConfigValidator {
                     "https://william278.net/project/velocitab"
             )
     );
+
+    @Comment("A set of servers that will be ignored to show the TAB list.")
+    private Set<String> ignoreServers = Set.of(
+            "lobby"
+    );
+
+    @NotNull
+    public Set<String> getIgnoreServers() {
+        return ignoreServers;
+    }
 
     @NotNull
     public List<ServerUrl> getUrlsForGroup(@NotNull Group group) {
