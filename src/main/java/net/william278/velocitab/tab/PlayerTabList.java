@@ -36,6 +36,7 @@ import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.william278.velocitab.Velocitab;
 import net.william278.velocitab.api.PlayerAddedToTabEvent;
+import net.william278.velocitab.config.Settings;
 import net.william278.velocitab.config.Group;
 import net.william278.velocitab.config.ServerUrl;
 import net.william278.velocitab.packet.ScoreboardManager;
@@ -216,7 +217,11 @@ public class PlayerTabList {
     private void handleDisplayLoad(@NotNull TabPlayer tabPlayer) {
         final Player joined = tabPlayer.getPlayer();
         final String serverName = getServerName(joined);
-        if(plugin.getSettings().getIgnoreServers().contains(serverName)){
+        final Settings pluginSettings=plugin.getSettings();
+        final boolean isWhiteListMode=pluginSettings.isWhiteListMode();
+        if(!isWhiteListMode && pluginSettings.getServers().contains(serverName)){
+            return;
+        }else if(isWhiteListMode && !pluginSettings.getServers().contains(serverName)){
             return;
         }
         final Group group = tabPlayer.getGroup();

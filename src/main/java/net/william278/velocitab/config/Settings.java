@@ -111,14 +111,15 @@ public class Settings implements ConfigValidator {
             )
     );
 
-    @Comment("A set of servers that will be ignored to show the TAB list.")
-    private Set<String> ignoreServers = Set.of(
-            "lobby"
-    );
+    @Comment("Decide the following list of servers is blacklist or whitelist.")
+    private boolean whiteListMode = false;
+
+    @Comment("A list of servers that will to show(white_list_mode=true) or not to show(white_list_mode=false) the TAB list.")
+    private Set<String> servers = Set.of();
 
     @NotNull
-    public Set<String> getIgnoreServers() {
-        return ignoreServers;
+    public Set<String> getServers() {
+        return servers;
     }
 
     @NotNull
